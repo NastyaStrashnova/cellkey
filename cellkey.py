@@ -105,9 +105,6 @@ class CellKey:
             (logical) vector specifying optimization parameter for monotony condition.
 
         """
-        D = 8
-        V = 7
-        js = 4
         ptab = ptable.create_ptable(D = D, V = V, js = js, pstay = pstay, optim = optim, mono = mono, table = 'cnts').do_slot("pTable")
         self.perturbation_table = pd.DataFrame(ptab).T
         self.perturbation_table = self.perturbation_table.rename(columns={0: 'i', 1: 'j', 2: 'p', 3: 'v', 4: 'p_lb', 5: 'p_ub'})
@@ -141,7 +138,7 @@ class CellKey:
         return freq_table
     
 
-df = pd.read_csv("covid_de.csv")
+df = pd.read_csv("covid_munich_january_2023.csv")
 print("Original data:\n",df.head(10))
 ck = CellKey(df)
 ck.add_row_key()
