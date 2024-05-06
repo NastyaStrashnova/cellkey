@@ -38,6 +38,9 @@ class CellKey:
         freq_table: pandas df
             frequency table.
         """
+        if list_of_features == []:
+            raise ValueError("Empty list of features!")
+            
         count_df = self.df.groupby(list_of_features).size().reset_index(name='count')  # Count occurrences
         count_df['ckeys'] = self.df.groupby(list_of_features)['rkeys'].sum().reset_index(drop=True)  # Sum 'record keys'
         count_df['ckeys'] = count_df['ckeys'].apply(lambda x: x % 1)
@@ -105,7 +108,11 @@ class CellKey:
             (logical) vector specifying optimization parameter for monotony condition.
 
         """
-        ptab = ptable.create_ptable(D = D, V = V, js = js, pstay = pstay, optim = optim, mono = mono, table = 'cnts').do_slot("pTable")
+        try:
+            ptab = ptable.create_ptable(D = D, V = V, js = js, pstay = pstay, optim = optim, mono = mono, table = 'cnts').do_slot("pTable")
+        except Exception as e:
+            raise ValueError(e)
+            
         self.perturbation_table = pd.DataFrame(ptab).T
         self.perturbation_table = self.perturbation_table.rename(columns={0: 'i', 1: 'j', 2: 'p', 3: 'v', 4: 'p_lb', 5: 'p_ub'})
 
