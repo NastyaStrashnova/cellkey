@@ -1,7 +1,7 @@
 # cellkey
 Method applies noise to statistical tables.
 
-Python solution for the cellkey method, inspired by the 'cellkey' R package.<br>
+Python solution for the Cell Key method, inspired by the 'cellkey' R package.<br>
 The solution also utilizes the 'ptable' library, which is written in R.
 
 ## Usage
